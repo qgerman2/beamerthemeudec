@@ -3,6 +3,8 @@
 \setbeamercolor*{transparent}{fg=, bg=}
 \setbeamerfont{title}{size=\LARGE,parent=structure,series=\bfseries}
 \setbeamerfont{title in head/foot}{series=\bfseries}
+\setbeamerfont{institute}{size=\normalsize}
+\setbeamerfont{date}{size=\normalsize}
 \setbeamertemplate{navigation symbols}{}
 
 % Texto en filas
@@ -17,9 +19,10 @@
 	\insertauthor
 }
 \defbeamertemplate*{third row}{udec}{
-	\parbox[c]{10cm}{
-		Profesor asistente:\\
-		William Landrón
+	\parbox[c]{0.7\textwidth}{
+		\usebeamerfont{institute}
+		\usebeamercolor{institute}
+		\insertinstitute
 	}
 	\hfill
 	\usebeamerfont{date}
