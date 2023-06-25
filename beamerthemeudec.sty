@@ -1,0 +1,89 @@
+\mode<presentation>
+
+\setbeamercolor*{transparent}{fg=, bg=}
+\setbeamerfont{title}{size=\LARGE,parent=structure,series=\bfseries}
+\setbeamerfont{title in head/foot}{series=\bfseries}
+\setbeamertemplate{navigation symbols}{}
+
+% Texto en filas
+\defbeamertemplate*{first row}{udec}{
+	\usebeamerfont{title}
+	\usebeamercolor{title}
+	\raggedright\inserttitle
+}
+\defbeamertemplate*{second row}{udec}{
+	\usebeamerfont{author}
+	\usebeamercolor{author}
+	\insertauthor
+}
+\defbeamertemplate*{third row}{udec}{
+	\parbox[c]{10cm}{
+		Profesor asistente:\\
+		William Landrón
+	}
+	\hfill
+	\usebeamerfont{date}
+	\usebeamercolor{date}
+	\insertdate
+}
+
+% Macro para cuadros con texto centrado
+% Argumentos
+% 	#1 Ancho de caja
+%	#2 Ancho de texto dentro de caja
+%	#3 Altura de caja
+%	#4 Color
+%	#5 Ajuste vertical del texto
+\newenvironment{colorparbox}[5][\pagewidth]{
+	\begin{beamercolorbox}[wd=#1,ht=#3]{#4}
+		\centering
+		\begin{minipage}[b][#3][#5]{#2}
+}
+{
+		\end{minipage}
+	\end{beamercolorbox}
+}
+
+% Portada
+\defbeamertemplate*{title page}{udec}{
+	\vspace{-\headheight}
+	\offinterlineskip
+	\begin{colorparbox}{\textwidth}{0.55\pageheight}{palette primary}{c}
+		\usebeamertemplate{first row}
+	\end{colorparbox}
+	\vspace{-0.55\pageheight}
+	\begin{colorparbox}{\pagewidth}{0.55\pageheight}{transparent}{t}
+		\vspace{0.1cm}
+		\hfill%
+		\includegraphics[width=3cm]{udec.png}
+	\end{colorparbox}
+	\begin{colorparbox}{\textwidth}{0.15\pageheight}{palette secondary}{c}
+		\usebeamertemplate{second row}
+	\end{colorparbox}
+	\begin{colorparbox}{\textwidth}{0.25\pageheight}{normal text}{c}
+		\usebeamertemplate{third row}
+	\end{colorparbox}
+}
+
+% Pie de página
+\defbeamertemplate*{footline}{udec}{
+	\begin{colorparbox}{0.9\pagewidth}{0.05\pageheight}{palette primary}{c}
+		\usebeamerfont{title in head/foot}%
+		\usebeamercolor{title in head/foot}%
+		\insertsubtitle
+		\hfill
+		\usebeamerfont{page number in head/foot}%
+		\usebeamerfont{page number in head/foot}%
+		\insertframenumber
+	\end{colorparbox}
+}
+
+% Fondo
+\defbeamertemplate*{background}{udec}{
+	\makebox[\pagewidth][r]{
+		\includegraphics[width=2cm]{dim.png}
+	}
+}
+
+\mode
+<all>
