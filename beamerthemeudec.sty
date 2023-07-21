@@ -6,28 +6,32 @@
 \setbeamerfont{institute}{size=\normalsize}
 \setbeamerfont{date}{size=\normalsize}
 \setbeamertemplate{navigation symbols}{}
+\setbeamerfont{footnote}{size=\tiny}
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+\AtBeginEnvironment{frame}{\setcounter{footnote}{0}}
 
 % Texto en filas
 \defbeamertemplate*{first row}{udec}{
-	\usebeamerfont{title}
-	\usebeamercolor{title}
-	\raggedright\inserttitle
+\usebeamerfont{title}
+\usebeamercolor{title}
+\raggedright\inserttitle
+\vspace{1cm}
 }
 \defbeamertemplate*{second row}{udec}{
-	\usebeamerfont{author}
-	\usebeamercolor{author}
-	\insertauthor
+\usebeamerfont{author}
+\usebeamercolor{author}
+\insertauthor
 }
 \defbeamertemplate*{third row}{udec}{
-	\parbox[c]{0.7\textwidth}{
-		\usebeamerfont{institute}
-		\usebeamercolor{institute}
-		\insertinstitute
-	}
-	\hfill
-	\usebeamerfont{date}
-	\usebeamercolor{date}
-	\insertdate
+\parbox[c]{0.7\textwidth}{
+	\usebeamerfont{institute}
+	\usebeamercolor{institute}
+	\insertinstitute
+}
+\hfill
+\usebeamerfont{date}
+\usebeamercolor{date}
+\insertdate
 }
 
 % Macro para cuadros con texto centrado
@@ -37,55 +41,82 @@
 %	#3 Altura de caja
 %	#4 Color
 %	#5 Ajuste vertical del texto
-\newenvironment{colorparbox}[5][\pagewidth]{
-	\begin{beamercolorbox}[wd=#1,ht=#3]{#4}
-		\centering
-		\begin{minipage}[b][#3][#5]{#2}
+\newenvironment{colorparbox}[5][\paperwidth]{
+\begin{beamercolorbox}[wd=#1,ht=#3]{#4}
+	\centering
+	\begin{minipage}[b][#3][#5]{#2}
 }
 {
-		\end{minipage}
-	\end{beamercolorbox}
+	\end{minipage}
+\end{beamercolorbox}
 }
 
 % Portada
 \defbeamertemplate*{title page}{udec}{
-	\vspace{-\headheight}
-	\offinterlineskip
-	\begin{colorparbox}{\textwidth}{0.55\pageheight}{palette primary}{c}
-		\usebeamertemplate{first row}
-	\end{colorparbox}
-	\vspace{-0.55\pageheight}
-	\begin{colorparbox}{\pagewidth}{0.55\pageheight}{transparent}{t}
-		\vspace{0.1cm}
-		\hfill%
-		\includegraphics[width=3cm]{udec.png}
-	\end{colorparbox}
-	\begin{colorparbox}{\textwidth}{0.15\pageheight}{palette secondary}{c}
-		\usebeamertemplate{second row}
-	\end{colorparbox}
-	\begin{colorparbox}{\textwidth}{0.25\pageheight}{normal text}{c}
-		\usebeamertemplate{third row}
-	\end{colorparbox}
+\vspace{-\headheight}
+\offinterlineskip
+\begin{colorparbox}{\textwidth}{0.55\paperheight}{palette primary}{b}
+	\usebeamertemplate{first row}
+\end{colorparbox}
+\vspace{-0.55\paperheight}
+\begin{colorparbox}{\paperwidth}{0.55\paperheight}{transparent}{t}
+	\vspace{0.1cm}
+	\hfill%
+	\includegraphics[width=3cm]{udec.png}
+\end{colorparbox}
+\begin{colorparbox}{\textwidth}{0.15\paperheight}{palette secondary}{c}
+	\usebeamertemplate{second row}
+\end{colorparbox}
+\begin{colorparbox}{\textwidth}{0.25\paperheight}{normal text}{c}
+	\usebeamertemplate{third row}
+\end{colorparbox}
 }
 
 % Pie de página
 \defbeamertemplate*{footline}{udec}{
-	\begin{colorparbox}{0.9\pagewidth}{0.05\pageheight}{palette primary}{c}
-		\usebeamerfont{title in head/foot}%
-		\usebeamercolor{title in head/foot}%
-		\insertsubtitle
-		\hfill
+\begin{colorparbox}{0.9\paperwidth}{0.05\paperheight}{palette primary}{c}
+	\usebeamerfont{title in head/foot}%
+	\usebeamercolor{title in head/foot}%
+	\insertsubtitle
+	\hfill
+	\ifbeamer@noframenumbering\else%
 		\usebeamerfont{page number in head/foot}%
 		\usebeamerfont{page number in head/foot}%
-		\insertframenumber
-	\end{colorparbox}
+		\insertframenumber%
+	\fi
+
+\end{colorparbox}
 }
 
 % Fondo
 \defbeamertemplate*{background}{udec}{
-	\makebox[\pagewidth][r]{
-		\includegraphics[width=2cm]{dim.png}
-	}
+\makebox[\paperwidth][r]{
+	\includegraphics[width=2cm]{dim.png}
+}
+}
+
+% Título de sección
+\defbeamertemplate*{section page}{udec}[1][]{
+\begingroup
+	\centering
+	{\usebeamerfont{section name}\usebeamercolor[fg]{section name}\phantom{\sectionname~\insertsectionnumber}}
+	\vskip1em\par
+	\begin{beamercolorbox}[sep=12pt,center,#1]{section title}
+	\usebeamerfont{section title}\insertsection\par
+	\end{beamercolorbox}
+\endgroup
+}
+
+% Título de subsección
+\defbeamertemplate*{subsection page}{udec}[1][]{
+\begingroup
+	\centering
+	{\usebeamerfont{subsection name}\usebeamercolor[fg]{subsection name}\phantom{\subsectionname~\insertsubsectionnumber}}
+	\vskip1em\par
+	\begin{beamercolorbox}[sep=8pt,center,#1]{subsection title}
+	\usebeamerfont{subsection title}\insertsubsection\par
+	\end{beamercolorbox}
+\endgroup
 }
 
 \mode
